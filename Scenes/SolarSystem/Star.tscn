@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy4mdupk1d3l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_va83q"]
+albedo_color = Color(0.752941, 0.831373, 0, 1)
+
+[node name="Star" type="Node3D"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 100.0
+rings = 12
+material = SubResource("StandardMaterial3D_va83q")
