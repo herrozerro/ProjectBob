@@ -8,10 +8,16 @@
 
 config_version=5
 
+[MonoCustomResourceRegistry]
+
+ClassPrefix=""
+SearchType=0
+ResourceScriptDirectories=["res://"]
+
 [application]
 
 config/name="Project Bob"
-run/main_scene="res://Mission Control.tscn"
+run/main_scene="res://Scenes/Console/GameRoot.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,6 +32,10 @@ project/assembly_name="Project Bob"
 [editor]
 
 movie_writer/movie_file="/home/josiahb/Godot/ProjectBob/Movie/output.avi"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MonoCustomResourceRegistry/plugin.cfg")
 
 [input]
 

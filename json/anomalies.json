@@ -1,0 +1,109 @@
+[
+	{
+  "EventType": "Exploration",
+  "EventDescription": "Your sensors detect a peculiar asteroid with unusual spectral readings.",
+  "Hazard": "Intense solar radiation increases the risk of damage to the space probe's instruments.",
+  "Difficulty": 0.8,
+  "Options": [
+	{
+	  "OptionDescription": "Perform a close analysis",
+	  "SuccessChance": 0.8,
+	  "DamageChance": 0.4,
+	  "ResourcesConsumed": [
+		{ "resource": "energy", "quantity": 20 }
+	  ],
+	  "Rewards": ["valuable spectral data"],
+	  "Consequences": ["potential instrument damage"]
+	},
+	{
+	  "OptionDescription": "Collect data from a distance",
+	  "SuccessChance": 0.5,
+	  "DamageChance": 0.1,
+	  "ResourcesConsumed": [
+		{ "resource": "energy", "quantity": 10 }
+	  ],
+	  "Rewards": ["partial spectral data"],
+	  "Consequences": []
+	},
+	{
+	  "OptionDescription": "Avoid the asteroid and continue with the mission",
+	  "SuccessChance": 1.0,
+	  "DamageChance": 0.0,
+	  "ResourcesConsumed": [],
+	  "Rewards": [],
+	  "Consequences": []
+	}
+  ]
+},
+{
+  "EventType": "Encounter",
+  "EventDescription": "An unidentified spacecraft appears on the probe's radar.",
+  "Hazard": "Potential hostile encounter.",
+  "Difficulty": 0.6,
+  "Options": [
+	{
+	  "OptionDescription": "Initiate communication",
+	  "SuccessChance": 0.7,
+	  "DamageChance": 0.1,
+	  "ResourcesConsumed": [
+		{ "resource": "energy", "quantity": 15 }
+	  ],
+	  "Rewards": ["diplomatic resolution", "potential alliance"],
+	  "Consequences": []
+	},
+	{
+	  "OptionDescription": "Attempt evasive maneuvers",
+	  "SuccessChance": 0.9,
+	  "DamageChance": 0.3,
+	  "ResourcesConsumed": [],
+	  "Rewards": [],
+	  "Consequences": ["potential damage to the probe"]
+	},
+	{
+	  "OptionDescription": "Monitor the spacecraft from a distance",
+	  "SuccessChance": 1.0,
+	  "DamageChance": 0.0,
+	  "ResourcesConsumed": [],
+	  "Rewards": ["limited observational data"],
+	  "Consequences": []
+	}
+  ]
+},
+{
+  "EventType": "Discovery",
+  "EventDescription": "A previously unknown celestial body is detected by the probe's sensors.",
+  "Hazard": "Unstable gravitational field poses navigation challenges.",
+  "Difficulty": 0.9,
+  "Options": [
+	{
+	  "OptionDescription": "Enter orbit around the celestial body",
+	  "SuccessChance": 0.9,
+	  "DamageChance": 0.2,
+	  "ResourcesConsumed": [
+		{ "resource": "fuel", "quantity": 30 }
+	  ],
+	  "Rewards": ["in-depth analysis data"],
+	  "Consequences": []
+	},
+	{
+	  "OptionDescription": "Conduct a flyby for brief observations",
+	  "SuccessChance": 0.6,
+	  "DamageChance": 0.1,
+	  "ResourcesConsumed": [
+		{ "resource": "fuel", "quantity": 15 }
+	  ],
+	  "Rewards": ["limited observational data"],
+	  "Consequences": []
+	},
+	{
+	  "OptionDescription": "Continue on the mission path without investigating further",
+	  "SuccessChance": 1.0,
+	  "DamageChance": 0.0,
+	  "ResourcesConsumed": [],
+	  "Rewards": [],
+	  "Consequences": []
+	}
+  ]
+}
+
+]

@@ -7,19 +7,15 @@
 [ext_resource type="Script" path="res://Scripts/ConsoleLabel.cs" id="4_vo510"]
 [ext_resource type="Script" path="res://Scripts/ConsoleCommand.cs" id="5_d1qud"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r5u8w"]
-sky_top_color = Color(0.709804, 0.701961, 0.709804, 1)
-sky_horizon_color = Color(0.763726, 0.762838, 0.762662, 1)
-ground_horizon_color = Color(0.763726, 0.762838, 0.762662, 1)
+[sub_resource type="Sky" id="Sky_pncb3"]
 
-[sub_resource type="Sky" id="Sky_w6lx4"]
-sky_material = SubResource("ProceduralSkyMaterial_r5u8w")
-
-[sub_resource type="Environment" id="Environment_2igcb"]
+[sub_resource type="Environment" id="Environment_v0as6"]
 background_mode = 2
-sky = SubResource("Sky_w6lx4")
-tonemap_mode = 2
-glow_enabled = true
+sky = SubResource("Sky_pncb3")
+ambient_light_source = 2
+ambient_light_color = Color(0.764706, 0.764706, 0.764706, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_t0o16"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtnen"]
 albedo_color = Color(0, 0.552941, 0.517647, 1)
@@ -42,7 +38,8 @@ Label/styles/normal = SubResource("StyleBoxFlat_gcawc")
 script = ExtResource("1_golue")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_2igcb")
+environment = SubResource("Environment_v0as6")
+camera_attributes = SubResource("CameraAttributesPractical_t0o16")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.245734)
@@ -70,8 +67,6 @@ size = Vector3(0.540573, 1.75572, 13.3378)
 [node name="CSGBox3D5" type="CSGBox3D" parent="CSGBox3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.343355, 0.761886, 5.10747)
 size = Vector3(0.540573, 1.75572, 16.405)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
 [node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true
@@ -112,6 +107,7 @@ offset_left = 2.0
 offset_top = 396.0
 offset_right = 649.0
 offset_bottom = 427.0
+caret_blink = true
 script = ExtResource("5_d1qud")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ConsoleController"]

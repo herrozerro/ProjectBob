@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds2pd7ai3ksl3"]
+
+[ext_resource type="FontVariation" uid="uid://bn4r85ngsgp07" path="res://fonts/plex_mono.tres" id="1_afgiw"]
+
+[node name="Response" type="Label"]
+theme_override_fonts/font = ExtResource("1_afgiw")
+theme_override_font_sizes/font_size = 24
+text = "This is what the user will see"
+autowrap_mode = 2

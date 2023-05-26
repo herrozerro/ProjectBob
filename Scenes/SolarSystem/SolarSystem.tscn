@@ -1,14 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4cww77xcpsok"]
+[gd_scene load_steps=5 format=3 uid="uid://d4cww77xcpsok"]
 
 [ext_resource type="Script" path="res://Scripts/SolarSystemGenerator.cs" id="1_p2x1a"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4eq8x"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_0tji5"]
+sky_material = SubResource("ProceduralSkyMaterial_4eq8x")
+
+[sub_resource type="Environment" id="Environment_dcrpo"]
+background_mode = 2
+sky = SubResource("Sky_0tji5")
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="SolarSystem" type="Node3D"]
 script = ExtResource("1_p2x1a")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dcrpo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 8.35187e-23, 4.37114e-08, -4.37114e-08, 1.91069e-15, 1, 0, -1, 1.91069e-15, 0, 1285.23, 0)
 fov = 120.0
 size = 195.76
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160.96, 0, 0)

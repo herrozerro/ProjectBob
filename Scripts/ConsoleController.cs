@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Godot;
+using SingularityLathe.Forge.StellarForge;
 
 namespace ProjectBob.Scripts;
 
@@ -54,6 +59,9 @@ public partial class ConsoleController : Control
 				command = "go";
 				response = "Going to a new system";
 				break;
+			case string s when s.StartsWith("scan"):
+				response = GetScan();
+				break;
 			case string s when s.ToLower() == "exit":
 				Display();
 				return;
@@ -72,6 +80,17 @@ public partial class ConsoleController : Control
 			EmitSignal(SignalName.CommandSubmission, command);
 		}
 
+	}
+
+	private string GetScan()
+	{
+		StringBuilder sb = new();
+		foreach (Planet planet in Globals.SolarSystem.ChildBodies.Cast<Planet>())
+		{
+			sb.AppendLine($"Planet: {planet.Name} Type: {planet.PlanetaryType.Description} Atmo: {planet.Atmosphere.AtmosphereType}");
+		}
+
+		return sb.ToString();
 	}
 }
 

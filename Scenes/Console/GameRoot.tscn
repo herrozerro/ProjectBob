@@ -1,0 +1,157 @@
+[gd_scene load_steps=17 format=3 uid="uid://uuaignreioqc"]
+
+[ext_resource type="Script" path="res://Scenes/Console/GameRoot.cs" id="1_51qlv"]
+[ext_resource type="Script" path="res://Scenes/Console/HistoryRows.cs" id="1_gfnbw"]
+[ext_resource type="FontVariation" uid="uid://bn4r85ngsgp07" path="res://fonts/plex_mono.tres" id="2_hkuto"]
+[ext_resource type="Script" path="res://Scenes/Console/CommandInput.cs" id="4_vit2h"]
+[ext_resource type="Script" path="res://Scenes/Console/CommandParser.cs" id="5_5aqx4"]
+[ext_resource type="Script" path="res://Scenes/Console/ShippyContainer.cs" id="5_na8pv"]
+[ext_resource type="Texture2D" uid="uid://b80ypy6k7e4vv" path="res://textures/Shippy/slice1.png" id="5_o1jmn"]
+[ext_resource type="Script" path="res://Scenes/Console/GameSim.cs" id="6_3av7u"]
+[ext_resource type="FontFile" uid="uid://c7u05j6snibo4" path="res://fonts/IBMPlexMono-SemiBold.ttf" id="6_hrkmx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iemx4"]
+bg_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdhbc"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kaene"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qixd7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lcfbl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxahw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oh06i"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[node name="GameRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_51qlv")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iemx4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Rows" type="VBoxContainer" parent="Background/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="GameInfo" type="PanelContainer" parent="Background/MarginContainer/HBoxContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_wdhbc")
+
+[node name="Scroll" type="ScrollContainer" parent="Background/MarginContainer/HBoxContainer/Rows/GameInfo"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HistoryRows" type="VBoxContainer" parent="Background/MarginContainer/HBoxContainer/Rows/GameInfo/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+script = ExtResource("1_gfnbw")
+
+[node name="InputArea" type="PanelContainer" parent="Background/MarginContainer/HBoxContainer/Rows"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kaene")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/HBoxContainer/Rows/InputArea"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/MarginContainer/HBoxContainer/Rows/InputArea/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hkuto")
+theme_override_font_sizes/font_size = 28
+text = " > "
+
+[node name="CommandInput" type="LineEdit" parent="Background/MarginContainer/HBoxContainer/Rows/InputArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_hkuto")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qixd7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lcfbl")
+max_length = 50
+caret_blink = true
+script = ExtResource("4_vit2h")
+
+[node name="ShippyContainer" type="VBoxContainer" parent="Background/MarginContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("5_na8pv")
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/MarginContainer/HBoxContainer/ShippyContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxahw")
+
+[node name="CenterContainer" type="CenterContainer" parent="Background/MarginContainer/HBoxContainer/ShippyContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="ShippyFace" type="TextureRect" parent="Background/MarginContainer/HBoxContainer/ShippyContainer/PanelContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+texture = ExtResource("5_o1jmn")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ShippyTextContainer" type="PanelContainer" parent="Background/MarginContainer/HBoxContainer/ShippyContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oh06i")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/HBoxContainer/ShippyContainer/ShippyTextContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ShippyText" type="Label" parent="Background/MarginContainer/HBoxContainer/ShippyContainer/ShippyTextContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_fonts/font = ExtResource("6_hrkmx")
+theme_override_font_sizes/font_size = 20
+text = "Hello I am shippy!"
+autowrap_mode = 2
+
+[node name="CommandParser" type="Node" parent="."]
+script = ExtResource("5_5aqx4")
+
+[node name="GameSim" type="Node" parent="."]
+script = ExtResource("6_3av7u")
+
+[connection signal="text_submitted" from="Background/MarginContainer/HBoxContainer/Rows/InputArea/HBoxContainer/CommandInput" to="." method="OnCommandTextSubmitted"]
+[connection signal="text_submitted" from="Background/MarginContainer/HBoxContainer/Rows/InputArea/HBoxContainer/CommandInput" to="Background/MarginContainer/HBoxContainer/Rows/InputArea/HBoxContainer/CommandInput" method="OnCommandTextSubmitted"]

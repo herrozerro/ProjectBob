@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using SingularityLathe.Forge.StellarForge;
+using SingularityLathe.Forge.StellarForge.Services;
+using SingularityLathe.RadLibs;
 
 namespace ProjectBob.Scripts;
 
@@ -9,10 +12,20 @@ public partial class SolarSystemGenerator : Node3D
 {
 	private List<Node3D> _planets = new();
 	private Node3D _star = new();
-	
+
+	private StarSystemBuilderService builder;
+
+	private IStellarBody SolarSystem;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		var rand = new Random();
+		var stellarConfig = new StellarForgeConfiguration();
+		builder = new StarSystemBuilderService(rand,
+			new PlanetBuilderService(rand, new MoonBuilderService(rand, stellarConfig), stellarConfig),
+			new AnomalyGeneratorService(rand, new List<Anomaly>()), stellarConfig);
+
 		GenerateSystem();
 	}
 
@@ -27,6 +40,8 @@ public partial class SolarSystemGenerator : Node3D
 	
 	private void GenerateSystem()
 	{
+		SolarSystem = builder.GenerateStar().GenerateSystem().Build().SystemStar;
+		
 		PackedScene starScene = (PackedScene)GD.Load("res://Scenes/SolarSystem/Star.tscn");
 		PackedScene planetScene = (PackedScene)GD.Load("res://Scenes/SolarSystem/Planet.tscn");
 
@@ -43,18 +58,25 @@ public partial class SolarSystemGenerator : Node3D
 		AddChild(_star);
 		var rnd = new Random();
 		int numberOfPlanets = rnd.Next(1, 5);
-		
-		for (int i = 0; i < numberOfPlanets; i++)
+
+		int i = 0;
+		var rand = new Random();
+		foreach (var planet in SolarSystem.ChildBodies)
 		{
 			Node3D planetInstance = planetScene.Instantiate<Node3D>();
-			planetInstance.GlobalPosition = new Vector3(200 * (i + 1), 0, 0);
-			var planet = (CsgSphere3D)planetInstance.FindChild("CSGSphere3D");
+			planetInstance.GlobalPosition = new Vector3( rand.Next(200 * (i + 1), 500 * (i + 1)), 0, 0);
+			
+			var planetSphere3D = (CsgSphere3D)planetInstance.FindChild("CSGSphere3D");
 			var mat = new StandardMaterial3D();
 			mat.AlbedoColor = new Color(rnd.NextSingle(), rnd.NextSingle(), rnd.NextSingle());
-			planet.Material = mat;
+			planetSphere3D.Material = mat;
+			
 			_star.AddChild(planetInstance);
 			_planets.Add(planetInstance);
+			i++;
 		}
+
+		Globals.SolarSystem = SolarSystem;
 	}
 
 	private void OrbitPlanet(float delta, Node3D starInstance, Node3D planetInstance)

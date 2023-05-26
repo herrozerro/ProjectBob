@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlas7tfpldl0d"]
+
+[ext_resource type="Script" path="res://Scenes/Console/InputResponse.cs" id="1_blqj4"]
+[ext_resource type="FontVariation" uid="uid://bn4r85ngsgp07" path="res://fonts/plex_mono.tres" id="1_wmuxl"]
+[ext_resource type="PackedScene" uid="uid://ds2pd7ai3ksl3" path="res://Scenes/Console/response.tscn" id="3_o7x6k"]
+
+[node name="InputResponse" type="VBoxContainer"]
+script = ExtResource("1_blqj4")
+
+[node name="UserInput" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.745098, 0.745098, 0.745098, 1)
+theme_override_fonts/font = ExtResource("1_wmuxl")
+theme_override_font_sizes/font_size = 16
+text = "This is what the user typed"
+
+[node name="Response" parent="." instance=ExtResource("3_o7x6k")]
+layout_mode = 2

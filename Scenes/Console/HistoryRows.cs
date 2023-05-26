@@ -1,13 +1,8 @@
 using Godot;
 using System;
-using SingularityLathe.Forge.StellarForge;
 
-public partial class Globals : Node
+public partial class HistoryRows : VBoxContainer
 {
-	public static bool IsConsoleVisible;
-
-	public static IStellarBody SolarSystem;
-	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
